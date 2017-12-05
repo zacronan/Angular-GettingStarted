@@ -1,8 +1,27 @@
+import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { IProduct } from '../../app/products/product';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Injectable()
 export class ProductService {
+  private _productUrl = './api/products/products.json';
+
+  constructor(private _http: HttpClient) { }
+  // getProducts(): Observable<IProduct[]> {
+  //   return this._http.get<IProduct[]>(this._productUrl)
+  //   .do(data => console.log(`All ${JSON.stringify(data)}`))
+  //   .catch(err => this.handleError(err));
+  // }
+  getProduct(id: number): IProduct {
+    return this.getProducts().find(x => x.productId === id);
+  }
+  private handleError(err: HttpErrorResponse) {
+    console.log(err.message);
+    return Observable.throw(err.message);
+  }
   getProducts(): IProduct[] {
     return [
       {
@@ -55,6 +74,6 @@ export class ProductService {
         'starRating': 4.6,
         'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png'
       }
-    ]
+    ];
   }
 }
