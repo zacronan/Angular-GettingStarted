@@ -1,4 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-  "tslint.autoFixOnSave": true
+  "tslint.autoFixOnSave": true,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.enablePreview": false
 }
